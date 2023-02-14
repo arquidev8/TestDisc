@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test de Personalidad DISC</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<div id="quiz">
+
+
+    <!-- <h1>Test de Personalidad DISC</h1> -->
+
+    <div id="testContainer"></div>
+    
+</div>
+
+    <!-- <button id="download-pdf" onclick="downloadPDF()">Descargar PDF</button> -->
+<script >
+  
+const data = [
+  {
+    questions: "Corro para llegar más rápido a donde voy.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "S",
+      "Ligeramente de Acuerdo": "I",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Me gusta llamar a las personas por sus apellidos.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "C",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "I",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Pongo a la gente bajo presión.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "S",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "D",
+      "De Acuerdo": "C",
+      'Neutral': "D"
+    }
+  },
+  {
+    questions: "Me jacto de mis virtudes.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "S",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "D",
+      "De Acuerdo": "C",
+      'Neutral': "D"
+    }
+  },
+  {
+    questions: "Siempre estoy buscando formas de ganar dinero.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "S",
+      "Ligeramente en Desacuerdo": "C",
+      "Ligeramente de Acuerdo": "D",
+      "De Acuerdo": "I",
+      'Neutral': "D"
+    }
+  },
+  {
+    questions: "Confronto a las personas cuando cuentan historias falsas o exageradas.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "S",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "D",
+      "De Acuerdo": "C",
+      'Neutral': "D"
+    }
+  },
+  {
+    questions: "Exijo el reconocimiento que merezco.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Acelero para evitar que me rebasen.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Siento una fuerte necesidad de tener poder.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Intento superar a los demás.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Me gusta ser parte de una multitud ruidosa.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "S",
+      "Ligeramente de Acuerdo": "D",
+      "De Acuerdo": "I",
+      'Neutral': "D"
+    }
+  },
+  {
+    questions: "Quiero que los extraños me amen.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "S",
+      "Ligeramente en Desacuerdo": "C",
+      "Ligeramente de Acuerdo": "I",
+      "De Acuerdo": "D",
+      'Neutral': "I"
+    }
+  },
+  {
+    questions: "Bromeo mucho.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Me río en voz alta.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "S",
+      "Ligeramente de Acuerdo": "I",
+      "De Acuerdo": "D",
+      'Neutral': "I"
+    }
+  },
+  {
+    questions: "Estoy dispuesto a probar cualquier cosa al menos una vez.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "S",
+      "Ligeramente de Acuerdo": "I",
+      "De Acuerdo": "D",
+      'Neutral': "I"
+    }
+  },
+  {
+    questions: "Busco la aventura.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "S",
+      "Ligeramente de Acuerdo": "D",
+      "De Acuerdo": "I",
+      'Neutral': "D"
+    }
+  },
+  {
+    questions: "Hago mucho ruido.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Encuentro humor en todo.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Me encantan las fiestas grandes.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "S",
+      "Ligeramente de Acuerdo": "I",
+      "De Acuerdo": "D",
+      'Neutral': "I"
+    }
+  },
+  {
+    questions: "Prefiero participar plenamente en lugar de vivir al margen.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "S",
+      "Ligeramente de Acuerdo": "I",
+      "De Acuerdo": "D",
+      'Neutral': "I"
+    }
+  },
+  {
+    questions: "Evito criticar las ideas de otras personas.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "C",
+      "De Acuerdo": "S",
+      'Neutral': "C"
+    }
+  },
+  {
+    questions: "Solo quiero que todos sean iguales.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "C",
+      "De Acuerdo": "S",
+      'Neutral': "C"
+    }
+  },
+  {
+    questions: "Expreso las cosas diplomáticamente.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "S",
+      "Ligeramente de Acuerdo": "I",
+      "De Acuerdo": "D",
+      'Neutral': "I"
+    }
+  },
+  {
+    questions: "Tengo palabras positivas para todos.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Creo que los demás tienen buenas intenciones.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Yo nunca haría trampa en mis impuestos.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Valoro más la cooperación que la competencia.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Raramente hago alarde de mis logros.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Odio parecer insistente.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Si a mucha gente le gusta algo, normalmente a mí también.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Soy emocionalmente reservado.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Leo la letra pequeña.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Evito cometer errores.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Siempre estoy alerta.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "I",
+      "Ligeramente en Desacuerdo": "S",
+      "Ligeramente de Acuerdo": "C",
+      "De Acuerdo": "D",
+      'Neutral': "C"
+    }
+  },
+  {
+    questions: "Nunca tiro basura.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "I",
+      "Ligeramente en Desacuerdo": "S",
+      "Ligeramente de Acuerdo": "C",
+      "De Acuerdo": "D",
+      'Neutral': "C"
+    }
+  },
+  {
+    questions: "No me gustan las conversaciones superficiales.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "D",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "I",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Odio cuando la gente quiere hacer cambios sin razón.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Me encanta el orden y la regularidad.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Mi primera reacción ante una idea es ver sus defectos.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Salgo temprano de las fiestas.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Prefiero entablar amistad con personas que son exactamente como yo.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Me gusta hacer cosas buenas por la gente aunque no me den crédito.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "C",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "I",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Siempre recuerdo cuando alguien me felicita.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "No me gusta la gente que viste de manera desordenada.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "D",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "C",
+      'Neutral': "S"
+    }
+  },
+  {
+    questions: "Pierdo la paciencia cuando me canso.",
+    choices: [
+      'Discrepar',
+      'Ligeramente en Desacuerdo',
+      'Neutral',
+      'Ligeramente de Acuerdo',
+      'De Acuerdo',
+    ],
+    personalityType: {
+      "Discrepar": "C",
+      "Ligeramente en Desacuerdo": "I",
+      "Ligeramente de Acuerdo": "S",
+      "De Acuerdo": "D",
+      'Neutral': "S"
+    }
+  },
+  
+ 
+  
+];
+
+let currentQuestionIndex = 0;
+let selectedChoice = null;
+let choices = {
+  D: 0,
+  I: 0,
+  S: 0,
+  C: 0
+};
+let personalityType = null;
+
+let name = "";
+let email = "";
+
+const testContainer = document.getElementById("testContainer");
+const downloadPdfButton = document.getElementById("download-pdf");
+
+
+const displayForm = () => {
+  testContainer.innerHTML = `
+  <h3 class="title">Test de Personalidad DISC</h3>
+    <div class="flex flex-col items-center">
+      <img class="w-64" src="./images/logo2.jpg" alt="Test introduction">
+      <h3 class="text-lg font-medium mt-6">Por favor, ingrese su nombre:</h3>
+      <input placeholder="Ingrese su Nombre" id="name-input" class="border rounded p-3 mt-2" type="text" required />
+      <h3 class="text-lg font-medium mt-6">Por favor, ingrese su correo electrónico:</h3>
+      <input placeholder="Ingrese su Correo electronico" id="email-input" class="border rounded p-3 mt-2" type="text" required />
+      <br><br>
+      <button class="bg-gray-500 text-white p-2 rounded mt-6 hover:bg-green-400" onclick="handleStart()">Iniciar test</button>
+    </div>
+  `;
+};
+
+displayForm();
+
+
+const displayStart = () => {
+  testContainer.innerHTML = `
+    <div >
+      <h3 class="welcome">Bienvenido al test</h3>
+      <p class="p1" style="text-align: justify">La prueba DISC es una evaluación de la personalidad que se utiliza para determinar los estilos de comportamiento de un individuo en el lugar de trabajo, por lo que no existen 
+        respuestas incorrectas. Responde a las preguntas de manera honesta y objetiva, para evitar que los resultados se tornen inválidos. Elige la primera respuesta que instintivamente 
+        te venga a la mente y no analices demasiado las preguntas.
+        </p> 
+        <p class="p2"  style="text-align: justify">Lee cuidadosamente cada pregunta antes de responder y selecciona la respuesta con la que más te identifiques. 
+          Asegúrate de hacer la prueba en un ambiente tranquilo y sin distracciones, separando unos 15 minutos de tu tiempo para completarla. 
+        </p>
+        <p class="p3"  style="text-align: justify">Recuerda que la prueba de DISC es solo una herramienta para entender tu comportamiento en el lugar de trabajo y no debe ser utilizada para limitar tu potencial o desempeño.
+
+        </p>
+      
+      <br><br>
+      <button class='buttonInicio' onclick="displayQuestion()">Continuar</button>
+    </div>
+  `;
+
+   
+};
+
+const usedEmails = [];
+
+const handleStart = () => {
+  name = document.getElementById("name-input").value;
+  email = document.getElementById("email-input").value;
+  
+  if (!name || !email || !validateEmail(email)) {
+    alert("Por favor complete los campos obligatorios (nombre y correo electrónico válido) antes de continuar");
+    return;
+  }
+  
+  if (usedEmails.includes(email)) {
+    alert("La dirección de correo electrónico ya ha participado en el test. Por favor, introduzca una dirección de correo electrónico diferente.");
+    return;
+  }
+
+  usedEmails.push(email);
+  name = name.toUpperCase();
+  
+  displayStart();
+};
+
+
+
+const validateEmail = (email) => {
+  // regex pattern to match valid email addresses
+  const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return pattern.test(email);
+};
+
+
+
+
+const getButtonColor = (index) => {
+  switch (index) {
+    case 0:
+      return "linear-gradient(to right, red, red)";
+    case 1:
+      return "linear-gradient(to right, orange, orange )";
+    case 2:
+      return "linear-gradient(to right, grey, grey)";
+    case 3:
+      return "linear-gradient(to right, blue, blue)";
+    case 4:
+      return "linear-gradient(to right, green, green)";
+    default:
+      return "linear-gradient(to right, green, green)";
+  }
+};
+
+const displayQuestion = () => {
+  const randomIndex = Math.floor(Math.random() * data.length);
+  const currentQuestion = data[randomIndex];
+  const { questions, choices: options } = currentQuestion;
+
+  testContainer.innerHTML = `
+    <h3>${questions}</h3>
+    ${options
+      .map(
+        (choice, index) =>
+          `<button class='button' style="background: ${getButtonColor(index)}" onclick="handleChoiceSelect(${index})">${choice}</button>`
+      )
+      .join("")}
+      <p>Pregunta ${currentQuestionIndex + 1} de ${data.length}</p>
+  `;
+};
+
+//funcion anterior de handleChoiceSelection: esta funcion maneja el resultado segun la eleccion
+
+const handleChoiceSelect = (choiceIndex) => {
+  selectedChoice = data[currentQuestionIndex].choices[choiceIndex];
+  choices[data[currentQuestionIndex].personalityType[selectedChoice]] += 1;
+  // if (selectedChoice !== "neutral") {
+  //   choices[data[currentQuestionIndex].personalityType[selectedChoice]] += 1;
+  // }
+  handleNextQuestion();
+};
+
+const handleNextQuestion = () => {
+  if (currentQuestionIndex === data.length - 1) {
+    // display the result of the test
+    personalityType = Object.keys(choices).reduce((a, b) => 
+      choices[a] > choices[b] ? a : b
+    );
+    displayResult();
+    return;
+  }
+
+  currentQuestionIndex++;
+  selectedChoice = null;
+  displayQuestion();
+};
+
+let totalScore = 0;
+
+const calculateTotalScore = () => {
+  totalScore = 0;
+  Object.values(choices).forEach(choice => {
+    totalScore += choice;
+  });
+};
+
+const displayResult = () => {
+  calculateTotalScore();
+  testContainer.innerHTML = `
+    <div class="container">
+      <h3 class="titleResult">Resultado: ${personalityType}</h3>
+      <h3>Nombre: ${name}</h2>
+      <h3 class="correo">Correo electrónico: ${email}</h2>
+      <br><br>
+      <h3>Porcentaje de D: ${(choices.D / totalScore * 100).toFixed(2)}%</h3>
+      <progress value="${(choices.D / totalScore * 100).toFixed(2)}" max="100" style="width: 80%"></progress>
+      <br><br>
+      <h3>Porcentaje de I: ${(choices.I / totalScore * 100).toFixed(2)}%</h3>
+      <progress value="${(choices.I / totalScore * 100).toFixed(2)}" max="100" style="width: 80%"></progress>
+      <br><br>
+      <h3>Porcentaje de S: ${(choices.S / totalScore * 100).toFixed(2)}%</h3>
+      <progress value="${(choices.S / totalScore * 100).toFixed(2)}" max="100" style="width: 80%"></progress>
+      <br><br>
+      <h3>Porcentaje de C: ${(choices.C / totalScore * 100).toFixed(2)}%</h3>
+      <progress value="${(choices.C / totalScore * 100).toFixed(2)}" max="100" style="width: 80%"></progress>
+      <br><br>
+      <canvas id="myChart"></canvas>
+      <br><br>
+      <button class="bg-green-500 text-white p-2 rounded mt-6 hover:bg-green-400" id="download-pdf" onclick="handleDownloadPdf()">Descargar PDF</button>
+    </div>
+  `;
+
+  // Configuración de los datos y opciones del gráfico de torta
+  const data = {
+    labels: ['D', 'I', 'S', 'C'],
+    datasets: [{
+      label: 'Porcentaje de cada tipo de personalidad',
+      data: [(choices.D / totalScore * 100).toFixed(2),
+             (choices.I / totalScore * 100).toFixed(2),
+             (choices.S / totalScore * 100).toFixed(2),
+             (choices.C / totalScore * 100).toFixed(2)],
+      backgroundColor: [
+        '#ff6384',
+        '#36a2eb',
+        '#ffce56',
+        '#4bc0c0'
+      ],
+      borderWidth: 1
+    }]
+  };
+  const options = {
+    responsive: false,
+    maintainAspectRatio: true
+  };
+
+  // Creación del gráfico de torta
+  const ctx = document.getElementById('myChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    options: options
+  });
+};
+
+
+
+const handleDownloadPdf = () => {
+  const pdf = new jsPDF();
+
+  pdf.setFont("times");
+  pdf.setFontType("normal");
+  pdf.setFontSize(12);
+
+  pdf.setFontSize(16);
+  pdf.setFontType("bold");
+  pdf.text("Resultado de la prueba de personalidad", 14, 22);
+  pdf.setFontSize(12);
+  pdf.setFontType("normal");
+  pdf.text("Nombre:", 14, 32, { align: "left" });
+  pdf.text(`${name}`, 40, 32, { align: "left" });
+  pdf.line(14, 37, 196, 37);
+  pdf.text(`Correo electrónico: ${email}`, 14, 42);
+  pdf.text(`Tipo de personalidad: ${personalityType}`, 14, 52);
+  pdf.text(`Porcentaje de D: ${(choices.D / totalScore * 100).toFixed(2)}%`, 14, 62);
+  pdf.text(`Porcentaje de I: ${(choices.I / totalScore * 100).toFixed(2)}%`, 14, 72);
+  pdf.text(`Porcentaje de S: ${(choices.S / totalScore * 100).toFixed(2)}%`, 14, 82);
+  pdf.text(`Porcentaje de C: ${(choices.C / totalScore * 100).toFixed(2)}%`, 14, 92);
+
+
+  const data = [
+    [`D (${(choices.D / totalScore * 100).toFixed(2)}%)`, (choices.D / totalScore * 100)],
+    [`I (${(choices.I / totalScore * 100).toFixed(2)}%)`, (choices.I / totalScore * 100)],
+    [`S (${(choices.S / totalScore * 100).toFixed(2)}%)`, (choices.S / totalScore * 100)],
+    [`C (${(choices.C / totalScore * 100).toFixed(2)}%)`, (choices.C / totalScore * 100)],
+ 
+    
+  ];
+
+  pdf.setFont("helvetica");
+  pdf.setFontType("normal");
+  pdf.setFontSize(12);
+
+  pdf.setFillColor(41, 128, 185);
+  pdf.setDrawColor(41, 128, 185);
+  pdf.setLineWidth(0.5);
+
+  let height = 120;
+  data.forEach((row) => {
+    pdf.rect(14, height, row[1], 10, "F");
+    pdf.text(row[0], 14, height + 9);
+    height += 20;
+  });
+
+  pdf.save("test-result.pdf");
+};
+
+
+
+
+//displayStart();
+hideDownloadPdfButton();
+displayQuestion();
+
+</script>
+
+</body>
+</html>

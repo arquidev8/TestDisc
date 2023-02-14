@@ -1,0 +1,142 @@
+html, body{
+    padding: 10px;
+    margin: 10px;
+}
+
+body{
+    background: #272343;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+
+#quiz{
+    background: white;
+    width: 30rem;
+    padding: 4rem;
+    text-align: center;
+}
+
+h1 {
+    color: #57636e;
+    font-size: 2.6rem;
+    text-align: center;
+    padding: 2px 0px;
+    margin-bottom: 50px;
+}
+
+h2 {
+    color: #57636e;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 2px 0px;
+}
+h3 {
+    color: #57636e;
+    font-size: 1.3rem;
+    text-align: center;
+    padding: 2px 0px;
+    font-weight: bold;
+}
+
+input {
+    width: 310px;
+    height: 25px;
+    border-radius: 4px;
+ 
+}
+
+#question {
+    font-size: 1.7rem;
+    color: 5a6772;
+   
+}
+
+.button {
+    background-color: #34a3a3;
+    color: white;
+    width: 250px;
+    font-size: 20px;
+    border-radius: .3rem;
+    padding: 16px 20px;
+    margin: 10px 40px 10px ;
+    outline: 0;
+}
+button.button {
+    background: linear-gradient(to right, #808080, #00FF00);
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+  }
+.buttonInicio {
+    background-color: #34a3a3;
+    color: white;
+    width: 150px;
+    font-size: 20px;
+    border-radius: .3rem;
+    padding: 16px 20px;
+    margin: 10px 40px 10px ;
+    outline: 0;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgba(0, 255, 0, 0.8);
+    cursor: pointer;
+}
+
+#progress{
+    font-size: 20px;
+    
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin-top: 40px;
+  
+
+}
+
+.p1{
+    margin-bottom: 10px;
+}
+
+.p2{
+    margin-bottom: 10px;
+}
+
+.title{
+    margin-bottom: 55px;
+}
+
+.welcome{
+    margin-bottom: 15px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  canvas {
+    width: 150px;
+    max-width: 200px;
+    height: 100px;
+  }
+
+  .titleResult{
+    margin-top: 15px;
+  }
+
+  .correo{
+    margin-bottom: -20px;
+  }
